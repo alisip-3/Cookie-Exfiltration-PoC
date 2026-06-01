@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <style>
+        body {
+            background-color: #F5F5DC; /* אותו בז' חלש ומהמם */
+            font-family: sans-serif;
+            padding: 30px;
+            direction: rtl;
+        }
+
+        h1, h3 {
+            color: #333;
+        }
+
+        /* כפתור חזרה ללוח השקים - עיצוב נקי וחמוד */
+        .back-button {
+            display: inline-block;
+            background-color: transparent;
+            color: #8A2BE2 !important; /* טקסט סגול */
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #8A2BE2; /* מסגרת סגולה עדינה */
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+
+        .back-button:hover {
+            background-color: #8A2BE2;
+            color: white !important; /* הופך לסגול מלא במעבר עכבר */
+        }
+
+        /* כפתור ההגרלה המלכותי */
+        .draw-button {
+            background-color: #ffc107;
+            color: #212529 !important;
+            padding: 15px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            border: 2px solid #e0a800;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        }
+
+        .draw-button:hover {
+            background-color: #e0a800;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        /* תיבת הטקסט לכתיבת פתק חדש */
+        textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-family: sans-serif;
+        }
+
+        /* כפתור "שמור פתק בשק" - נצבע בסגול */
+        .save-button {
+            background-color: #8A2BE2;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background-color: #7312c9;
+        }
+
+        /* עיצוב הפתקים הקיימים בתוך השק כמו קוביות ממו קטנות */
+        .note-card {
+            background-color: #FFFDE7; /* צבע צהבהב בהיר של פתק ממו אמיתי */
+            border-right: 5px solid #8A2BE2; /* פס סגול בצד של הפתק */
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 18px;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>השק: {{ jar_name }}</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <h1> שק: {{ jar_name }}</h1>
+        <a href="/login_redirect">🔙 חזרה לכל השקים</a>
+
+        <br><br>
+
+        <div style="padding: 20px; border: 2px dashed #333; max-width: 500px; margin: 0 auto; background-color: #C68AFF;">
+            <h3>🎲 הגרלה מהירה:</h3>
+            <form action="/draw/{{ jar_name }}" method="GET">
+                <button type="submit" style="font-size: 18px; padding: 10px 20px; cursor: pointer;"> שלוף פתק אקראי </button>
+            </form>
+        </div>
+
+        <br><br>
+
+        <h3>📜 הפתקים שיש בשק כרגע:</h3>
+        <div style="max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; text-align: right;">
+            {% if notes %}
+                <ul style="list-style-type: square;">
+                {% for note in notes %}
+                    <li style="font-size: 18px; margin-bottom: 8px;">{{ note }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p style="text-align: center; color: gray;">השק הזה עדיין ריק... זה הזמן להוסיף לו פתקים!</p>
+            {% endif %}
+        </div>
+
+        <hr style="width: 50%; margin-top: 40px;">
+
+        <h3>➕ הוספת פתק חדש לשק הזה</h3>
+        <form action="/add_note/{{ jar_name }}" method="POST">
+            <textarea name="note_content" rows="4" cols="40" placeholder="כתוב את הפתק שלך כאן (למשל: ללכת לסרט החדש בקולנוע)..." required></textarea>
+            <br><br>
+            <button type="submit" style="background-color: #8A2BE2; color: white; padding: 12px 28px; font-size: 18px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15); display: inline-block;">📌 שלח לשק</button>
+        </form>
+    </div>
+</body>
+</html>

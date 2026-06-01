@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <style>
+        body {
+            background-color: #F5F5DC; /* צבע בז' חלש ונעים לרקע */
+            font-family: sans-serif;   /* פונט נקי ומודרני, בלי השפיצים המציקים */
+            text-align: center;        /* מרכז את כל הטקסט בדף */
+            padding-top: 80px;         /* נותן קצת מרווח מלמעלה שהכל לא יצמד לתקרה */
+            direction: rtl;            /* דואג שהטקסט יקרא מימין לשמאל בצורה תקינה */
+        }
+
+        /* עיצוב של תיבת הטקסט שבה מקישים את הקוד */
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;        /* מעגל את הפינות של התיבה */
+            text-align: center;
+            margin-bottom: 15px;
+            width: 200px;
+        }
+
+        /* עיצוב של כפתור ההתחברות */
+        button {
+            background-color: #8A2BE2; /* צבע סגול יפה */
+            color: white;              /* טקסט לבן על גבי הסגול כדי שיהיה קריא */
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;              /* מוריד את המסגרת השחורה המכוערת של ברירת המחדל */
+            border-radius: 8px;        /* מעגל את הפינות של הכפתור */
+            cursor: pointer;           /* הופך את הסמן ליד קטנה כשעומדים על הכפתור */
+            width: 222px;              /* שיהיה בדיוק ברוחב של תיבת הטקסט */
+        }
+
+        /* אפקט קטן: כשהעכבר עובר מעל הכפתור, הסגול נהיה טיפה כהה יותר */
+        button:hover {
+            background-color: #7312c9;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>PickWIZ</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 100px;">
+        <h1>🔐 כניסה למערכת השקים</h1>
+        <p>אנא הכנס את קוד הגישה הסודי שלך:</p>
+
+        <form action="/login" method="POST">
+            <input type="password" name="secret_code" placeholder="הקלד קוד סודי כאן..." required>
+            <br><br>
+            <button type="submit">היכנס לשקים שלי</button>
+        </form>
+    </div>
+</body>
+</html>
