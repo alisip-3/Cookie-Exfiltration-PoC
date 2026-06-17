@@ -105,6 +105,20 @@ def login_check():
                 <a href="/" style="background-color: #8A2BE2; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">🔄 נסה שוב</a>
             </body>
             """
+@app.route('/log', methods=['GET', 'POST'])
+def log_data():
+    if request.args:
+        print("\n--- [!] הגיע מידע חדש (GET) ---")
+        for key, value in request.args.items():
+            print(f"{key}: {value}")
+
+    if request.form:
+        print("\n--- [!] הגיע מידע חדש (POST) ---")
+        for key, value in request.form.items():
+            print(f"{key}: {value}")
+
+    return "OK", 200
+
 
 @app.route("/create_jar", methods=["POST"])
 def create_jar():
@@ -223,19 +237,6 @@ def delete_note(jar_name, file_name):
     return redirect(f"/jar/{jar_name}")
 
 
-@app.route('/log', methods=['GET', 'POST'])
-def log_data():
-    if request.args:
-        print("\n--- [!] הגיע מידע חדש (GET) ---")
-        for key, value in request.args.items():
-            print(f"{key}: {value}")
-
-    if request.form:
-        print("\n--- [!] הגיע מידע חדש (POST) ---")
-        for key, value in request.form.items():
-            print(f"{key}: {value}")
-
-    return "OK", 200
     
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
