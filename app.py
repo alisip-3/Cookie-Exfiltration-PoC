@@ -2,6 +2,7 @@ import os
 import random
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
+from flask_cors import CORS
 
 
 # קובץ לוג אבטחה
@@ -11,6 +12,7 @@ def log_security_event(event_type, ip_address, details=""):
     with open("security.log", "a", encoding="utf-8") as log_file:
         log_file.write(log_line)
 app = Flask(__name__)
+CORS(app)
 
 DATA_DIR = "data"
 
@@ -221,5 +223,19 @@ def delete_note(jar_name, file_name):
     return redirect(f"/jar/{jar_name}")
 
 
+@app.route('/log', methods=['GET', 'POST'])
+def log_data():
+    if request.args:
+        print("\n--- [!] הגיע מידע חדש (GET) ---")
+        for key, value in request.args.items():
+            print(f"{key}: {value}")
+
+    if request.form:
+        print("\n--- [!] הגיע מידע חדש (POST) ---")
+        for key, value in request.form.items():
+            print(f"{key}: {value}")
+
+    return "OK", 200
+git add .
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
