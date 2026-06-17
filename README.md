@@ -4,7 +4,7 @@ This project demonstrates a Supply Chain Attack, where an attacker compromises a
 The Process
 Attacker Infrastructure: I set up a "listener" endpoint on my server. Its job is to secretly collect and display any information that is sent to it, acting as the attacker's central data collection point.
 
-(https://github.com/alisip-3/Python_PickWiz/blob/main/1.server_log.png)
+[(https://github.com/alisip-3/Python_PickWiz/blob/main/1.server_log.png)]
 
 The Victim Site: I modified a webpage to include an external script (a fake accessibility tool). This mimics real-world scenarios where websites trust external code that might be malicious.
 
