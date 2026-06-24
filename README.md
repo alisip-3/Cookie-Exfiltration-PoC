@@ -1,4 +1,4 @@
-#Security Analysis Report: Supply Chain Attack Simulation#
+(#Security Analysis Report: Supply Chain Attack Simulation#)
 ##Overview##
 ###This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Attack. The simulation highlights how third-party dependencies—even those intended for minor UI improvements—can be weaponized to compromise sensitive user session data.###
 
