@@ -20,7 +20,7 @@
 <body>
 
     <div class="container">
-        <h1>Welcome, Daniel</h1>
+        <h1>Welcome, <span id="displayUsername"></span></h1>
         
         <div class="balance-box">
             <p>Your Available Balance</p>
@@ -53,6 +53,16 @@
             </table>
         </div>
     </div>
+
+    <script>
+        // ברגע שהדף נטען, נמשוך את השם ששמרנו ב-localStorage
+        const savedName = localStorage.getItem('currentUser');
+        if (savedName) {
+            document.getElementById('displayUsername').textContent = savedName;
+        } else {
+            document.getElementById('displayUsername').textContent = "User";
+        }
+    </script>
 
 </body>
 </html>
