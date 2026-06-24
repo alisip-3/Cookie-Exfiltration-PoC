@@ -22,7 +22,7 @@ I embedded a small snippet of JavaScript into the login page. This script mimics
 ![Figure 2: The malicious script in the HTML, waiting for the user to submit the login form.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/2.%20fetch.png)
 
 3. Data Exfiltration
-Once the user logs in, the browser generates a session cookie (session_token). The malicious script accesses document.cookie, extracts the token, and sends it to my server via an asynchronous fetch request.
+Once the user logs in, the browser generates a session cookie (session_token). The malicious script accesses document.cookie, extracts the token, and sends it to my server via an asynchronous fetch request.After the session token is exfiltrated, the user is automatically redirected to the dashboard to maintain the illusion of a legitimate login process, effectively masking the malicious activity.
 
 ![Figure 3: The browser's Network Tab showing the sensitive cookie being exfiltrated to my server.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/3.cookie.png)
 
