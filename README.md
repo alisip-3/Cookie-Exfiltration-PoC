@@ -26,6 +26,8 @@ Once the user logs in, the browser generates a session cookie (session_token). T
 
 ![Figure 3: The browser's Network Tab showing the sensitive cookie being exfiltrated to my server.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/3.cookie.png)
 
+
+
 4. Successful Capture
 My server receives the request, extracts the cookie, and prints it to the logs. With this token, an attacker could impersonate the user without needing a password.
 
