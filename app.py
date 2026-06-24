@@ -118,7 +118,7 @@ def log_data():
             print(f"{key}: {value}")
 
     return "OK", 200
-@app.route('/dashboard')
+@app.route('/secure-zone/dashboard')
 def dashboard():
     return render_template('dashboard.html')
 
