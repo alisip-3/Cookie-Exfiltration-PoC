@@ -12,9 +12,10 @@ def log_security_event(event_type, ip_address, details=""):
     with open("security.log", "a", encoding="utf-8") as log_file:
         log_file.write(log_line)
 
-@app.route("/")
-def home():
-    return render_template("login.html")
+@app.route("/login", methods=["POST"])
+def login():
+    # This route handles the form submission and redirects to the bank dashboard
+    return redirect("/secure-zone/bank")
 
 @app.route("/secure-zone/bank")
 def bank_dashboard():
