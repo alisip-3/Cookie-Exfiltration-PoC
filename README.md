@@ -23,7 +23,7 @@ I paid attention to the small details to make this feel like a real-world scenar
 
 ![Proof of Concept: The Network tab showing the cookie being exfiltrated to the /log endpoint.]()
 
-Why this matters
+## Why this matters
 This simulation shows why it’s not enough to secure your own code. You are only as secure as the weakest third-party library you run. By building this end-to-end, I was able to better understand the impact of XSS vulnerabilities in a real-world, high-stakes environment like a banking portal.
 
 Disclaimer: This project was built for educational purposes only to demonstrate security vulnerabilities and how to defend against them.
