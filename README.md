@@ -1,55 +1,32 @@
-# Security Analysis Report: Supply Chain Attack Simulation
+# Banking Supply Chain Attack Simulation
+### About the Project
+In recent months, we’ve seen more and more companies integrating AI chatbots into their websites to improve customer service. Often, these bots are provided by third-party vendors. While this is great for UX, it creates a massive security blind spot: if the vendor's code is compromised, the company's website is compromised too.
 
-### Overview ###
+**I built this project to simulate that exact scenario. I wanted to see how a "trusted" third-party component—like a help-desk chatbot—could be used as a vector for a supply chain attack.**
 
-This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Attack. The simulation highlights how third-party dependencies even those intended for minor UI improvements can be weaponized to compromise sensitive user session data
+## How it Works
+I created a full-stack banking dashboard simulation to act as the "victim" site. The core of the project is the AI chatbot integration:
 
-## Live Demo
-You can test the simulation here:
-[Click here to access the Simulated Bank site](https://python-pickwiz.onrender.com/secure-zone)
-*(Note: This is a security demonstration. The cookie theft is purely for educational purposes and captured in the logs.)*
+**The Vector:** I embedded a chatbot widget into the bank's dashboard.
 
-## Attack Workflow ##
+**The Payload:** The bot is scripted to provide a "helpful" link to the user. In reality, this link contains a hidden JavaScript function.
 
-1. Setting up the C2 Server
-I created a Python server (using Flask) that acts as my "Command & Control" (C2) server. The server listens for incoming requests at a specific endpoint (/log) and logs any data received from the browser.
+**The Exfiltration:** When the user clicks the link, the script stealthily captures the user's session cookie and sends it directly to my logging server.
 
-![Figure 1: The backend server code, waiting to receive and log incoming](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/1.server.png)
+I paid attention to the small details to make this feel like a real-world scenario—from the professional banking UI to the actual cookie handling. I even set up a dedicated backend logger to verify that the "stolen" data is successfully received, which allowed me to document the entire attack flow.
 
-2. Malicious Code Injection
-I embedded a small snippet of JavaScript into the login page. This script mimics a trusted external library, but it is triggered as soon as the user logs in.
+## Screenshots
 
-![Figure 2: The malicious script in the HTML, waiting for the user to submit the login form.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/2.%20fetch.png)
+![Banking Dashboard: A professional interface that builds trust.]()
 
-3. Data Exfiltration
-Once the user logs in, the browser generates a session cookie (session_token). The malicious script accesses document.cookie, extracts the token, and sends it to my server via an asynchronous fetch request.After the session token is exfiltrated, the user is automatically redirected to the dashboard to maintain the illusion of a legitimate login process, effectively masking the malicious activity.
+![The Attack: Showing the malicious link inside the AI chat widget.]()
 
-![Figure 3: The browser's Network Tab showing the sensitive cookie being exfiltrated to my server.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/3.cookie.png)
+![Proof of Concept: The Network tab showing the cookie being exfiltrated to the /log endpoint.]()
 
+Why this matters
+This simulation shows why it’s not enough to secure your own code. You are only as secure as the weakest third-party library you run. By building this end-to-end, I was able to better understand the impact of XSS vulnerabilities in a real-world, high-stakes environment like a banking portal.
 
-
-4. Successful Capture
-My server receives the request, extracts the cookie, and prints it to the logs. With this token, an attacker could impersonate the user without needing a password.
-
-![Figure 4: The stolen session token appearing in my server logs, confirming the successful attack.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/4.log.png)
-
-## Vulnerability Analysis ##
-### The core vulnerability is the excessive trust in third-party scripts. ###
-
-- Lack of Isolation: Scripts running in the browser share the same origin and have access to sensitive data such as cookies.
-
-- Implicit Trust: Applications often load external scripts without verifying their integrity or restricting their capabilities.
-
-## Mitigation & Prevention ##
-### To defend against such attacks, the following security controls should be implemented: ###
-
-- Content Security Policy (CSP): Implement a strict CSP to restrict where scripts can be loaded from and, more importantly, to prevent the exfiltration of data to unauthorized external domains (using connect-src).
-
-- Subresource Integrity (SRI): Use SRI hashes to ensure that the browser only executes files that match a known, verified cryptographic hash.
-
-- HttpOnly Cookies: Set the HttpOnly flag on sensitive cookies (like session tokens). This prevents document.cookie from accessing them via JavaScript, rendering this specific attack ineffective.
-
-- Dependency Auditing: Regularly audit and update third-party libraries and avoid loading external scripts from untrusted or unverified sources.
+Disclaimer: This project was built for educational purposes only to demonstrate security vulnerabilities and how to defend against them.
 
 ### Tools Used: ###
 
