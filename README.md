@@ -29,7 +29,7 @@ I paid attention to the small details to make this feel like a real-world scenar
 ![](images/log.png)
 
 ## Mitigation & Defense
-How do we protect ourselves from this kind of attack? Here are the key security practices:
+### How do we protect ourselves from this kind of attack? Here are the key security practices:
 
 - Content Security Policy (CSP): Implementing a strict CSP would prevent the browser from sending data to unauthorized domains, effectively blocking the exfiltration part of the attack.
 
