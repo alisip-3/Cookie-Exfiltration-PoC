@@ -17,11 +17,11 @@ I paid attention to the small details to make this feel like a real-world scenar
 
 ## Screenshots
 
-![Banking Dashboard: A professional interface that builds trust.]()
+![Banking Dashboard: A professional interface that builds trust.](https://github.com/alisip-3/Supply-Chain-Attack-Simulation/blob/main/login.png)
 
-![The Attack: Showing the malicious link inside the AI chat widget.]()
+![The Attack: Showing the malicious link inside the AI chat widget.](https://github.com/alisip-3/Supply-Chain-Attack-Simulation/blob/main/chatbox.png)
 
-![Proof of Concept: The Network tab showing the cookie being exfiltrated to the /log endpoint.]()
+![Proof of Concept: The Network tab showing the cookie being exfiltrated to the /log endpoint.](https://github.com/alisip-3/Supply-Chain-Attack-Simulation/blob/main/inspect.png)(https://github.com/alisip-3/Supply-Chain-Attack-Simulation/blob/main/log.png)
 
 ## Why this matters
 This simulation shows why it’s not enough to secure your own code. You are only as secure as the weakest third-party library you run. By building this end-to-end, I was able to better understand the impact of XSS vulnerabilities in a real-world, high-stakes environment like a banking portal.
