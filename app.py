@@ -18,19 +18,26 @@ def home():
 
 @app.route("/login", methods=["POST"])
 def login():
-    # This route handles the form submission and redirects to the bank dashboard
-    return redirect("/secure-zone/bank")
+    # Fetch the username from the login form
+    username = request.form.get("username", "Customer")
+    # Redirect to bank  and pass the username as a URL parameter
+    return redirect(f"/secure-zone/bank?user={username}")
 
 @app.route("/secure-zone/bank")
 def bank_dashboard():
+    # Optional: You can get the user here if you need to do something in Python
+    username = request.args.get("user", "Customer")
     return render_template("bank.html")
 
 @app.route("/log", methods=['GET', 'POST'])
 def log_data():
+    # This captures the stolen cookies from the bot simulation
     if request.args:
         print(f"\n--- [!] New data received (GET) ---")
         for key, value in request.args.items():
             print(f"{key}: {value}")
+            # Optional: Log this to security.log as well
+            log_security_event("EXFILTRATION", request.remote_addr, f"{key}: {value}")
     return "OK", 200
 
 if __name__ == "__main__":
