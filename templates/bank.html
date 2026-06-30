@@ -63,6 +63,31 @@
             document.getElementById('displayUsername').textContent = "User";
         }
     </script>
+<!-- AI Chatbot Widget -->
+<div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 400px; background: white; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column;">
+    <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 10px 10px 0 0; font-weight: bold;">
+        AI Financial Assistant
+    </div>
+    <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 14px;">
+        <p><strong>Bot:</strong> Hello! How can I assist you with your banking needs today?</p>
+    </div>
+    <div style="padding: 10px; border-top: 1px solid #eee;">
+        <input type="text" id="chat-input" placeholder="Ask something..." style="width: 80%; padding: 5px;">
+        <button onclick="sendMessage()" style="padding: 5px;">Send</button>
+    </div>
+</div>
 
+<script>
+    function sendMessage() {
+        const input = document.getElementById('chat-input');
+        const messages = document.getElementById('chat-messages');
+        if (input.value.trim() !== "") {
+            messages.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
+            // Here the simulation will hook into the AI response logic
+            input.value = "";
+        }
+    }
+</script>
+    
 </body>
 </html>
