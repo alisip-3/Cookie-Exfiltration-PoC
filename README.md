@@ -39,6 +39,14 @@ I paid attention to the small details to make this feel like a real-world scenar
 
 - Third-Party Risk Management (TPRM): Before integrating external services, security teams must audit the vendor’s security posture and ensure they maintain a secure supply chainal.
 
+## Security & Robustness
+Since this project simulates a security attack, I wanted the simulation environment itself to be stable and resilient. I implemented a few "best practice" hardening techniques to ensure the demo runs smoothly:
+
+- Error Handling: I wrapped the data logging endpoint in a try/except block. This ensures that even if a browser sends malformed or unexpected data, the server won't crash during a live demo.
+
+- Input Sanitization: To prevent Log Injection attacks, I used a regex-based filter (re.sub) to sanitize all incoming data. This strips out potentially malicious characters before they are logged to my terminal or security file, keeping the server's backend clean and secure.
+
+- Static Session Tokens: For the purpose of this PoC, I used a static session token to clearly demonstrate the attack flow. In a production environment, I would implement dynamic, unique session management, but keeping it simple here helps focus on the supply chain vulnerability itself.
 
 ## Disclaimer
 This project is for educational purposes only. All data, including the banking dashboard, user authentication, and the "stolen" cookies, are part of a controlled simulation environment. No real-world systems, users, or financial data are harmed or involved. The purpose of this project is to showcase how security vulnerabilities function in order to learn how to defend against them.
